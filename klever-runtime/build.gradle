@@ -1,0 +1,15 @@
+
+group 'com.linecorp'
+version '0.1-SNAPSHOT'
+
+dependencies {
+    implementation "com.linecorp:clova-extension-core:$clovaSdkVersion"
+    implementation "com.linecorp:clova-extension-converter-jackson:$clovaSdkVersion"
+    implementation "org.jetbrains.kotlin:kotlin-script-util:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-script-runtime:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-compiler-embeddable:$kotlinVersion"
+
+    implementation "org.slf4j:slf4j-api:1.7.25"
+
+    testCompile "junit:junit:4.12"
+}

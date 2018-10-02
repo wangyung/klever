@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/customize.css">
+    <link rel="stylesheet" href="lib/codemirror/codemirror.css">
+    <script src="lib/codemirror/codemirror.js"></script>
+    <script src="lib/codemirror/mode/clike.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/checkCookie.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-nav mr-auto">
+        <p class="my-lg-0" th:text="'Welcome ' + ${user.name}"> </p>
+    </div>
+    <div class="my-lg-0">
+        <button class="btn btn-outline-primary mr-2 my-sm-0" onclick="logout()">Logout</button>
+    </div>
+
+</nav>
+<div class="ml-5 mr-5 my-2">
+    <h3>Clova Kotlin DSL online editor </h3>
+
+    <form>
+    <div class="d-flex p-1 my-2">
+        <div class="p-2 my-2">
+            <div class="d-flex flex-row p-1">
+                <h5>Edit your clova extension here</h5>
+                <span>&nbsp;&nbsp; Extension URL: &nbsp;&nbsp;</span>
+                <span id="extensionUrl"></span>
+            </div>
+            <textarea id="codeArea" th:text="${code}"></textarea>
+        </div>
+    </div>
+    <input type="hidden" id="userId" th:value="${user.id}">
+    <input type="hidden" id="clientId" th:value="${clientId}">
+    <input type="hidden" id="username" th:value="${user.name}">
+</form>
+    <div class="d-flex flex-column">
+        <p><input type="button" class="btn btn-primary" value="Build" onclick="buildDsl()"></p>
+    </div>
+    <div class="d-flex flex-column p-2 card">
+        <h3 class="p1">Build Logs</h3>
+        <ul id="logViewer" class="logView"></ul>
+    </div>
+</div>
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("codeArea"), {
+        mode: "text/x-kotlin",
+        lineNumbers: true,
+        indentUnit: 2
+    });
+    var username = document.getElementById("username").value;
+    if (getCookie("username") === '') {
+        setUsername(username);
+    } else {
+        var name = getCookie('username');
+        if (name !== username) {
+            setUsername(username);
+        }
+    }
+</script>
+</body>
+</html>

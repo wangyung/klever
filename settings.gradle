@@ -1,0 +1,4 @@
+rootProject.name = 'klever'
+include ("klever-runtime", "klever-webapp")
+
+

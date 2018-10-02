@@ -1,0 +1,62 @@
+buildscript {
+    ext.kotlinVersion = "1.2.71"
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+plugins {
+    id "org.jetbrains.kotlin.plugin.spring" version "1.2.70"
+    id "org.springframework.boot" version "2.0.1.RELEASE"
+    id "io.spring.dependency-management" version "1.0.4.RELEASE"
+}
+
+ext {
+    mybatisVersion = "3.4.6"
+    mysqlConnectorVersion = "8.0.12"
+    hikariCpVersion = "3.1.0"
+    mybatisSpringbootVersion = "1.3.2"
+}
+
+group = "com.linecorp"
+version = "0.1-SNAPSHOT"
+
+jar {
+    baseName = "klever"
+    version = "0.1.0"
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+
+    implementation project(":klever-runtime")
+
+    implementation "com.linecorp:clova-extension-core:$clovaSdkVersion"
+    implementation "com.linecorp:clova-extension-converter-jackson:$clovaSdkVersion"
+
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+    implementation("org.springframework.boot:spring-boot-starter-webflux") {
+        exclude group: "org.apache.tomcat", module: "tomcat-jdbc"
+    }
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    implementation "org.springframework.boot:spring-boot-devtools"
+
+    implementation "com.zaxxer:HikariCP:$hikariCpVersion"
+    implementation "mysql:mysql-connector-java:$mysqlConnectorVersion"
+    implementation "org.mybatis:mybatis:$mybatisVersion"
+    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:$mybatisSpringbootVersion"
+
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+    testCompile "io.projectreactor:reactor-test"
+    testCompile "org.springframework.restdocs:spring-restdocs-mockmvc"
+}
+
+bootJar {
+    requiresUnpack "**/kotlin*.jar", "**/clova-extension-*.jar", "**/klever-runtime-*.jar"
+}

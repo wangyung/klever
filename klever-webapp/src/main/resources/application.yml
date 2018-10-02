@@ -1,0 +1,11 @@
+spring:
+  thymeleaf:
+    cache: true
+    encoding: UTF-8
+    enabled: true
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://us-cdbr-iron-east-01.cleardb.net/heroku_ef8af18c5ffd1c2?reconnect=true&useUnicode=true&characterEncoding=utf-8
+    username: bef7910a06703b
+    password: 11f2f494
